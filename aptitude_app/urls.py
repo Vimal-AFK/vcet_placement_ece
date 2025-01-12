@@ -1,3 +1,6 @@
-#vimal is here from swetha laptop
-#vimal from vimal laptop
-#to check specific file push
+from django.urls import path 
+from . import views
+
+urlpatterns = [
+    path('', views.index , name ='home')
+]
