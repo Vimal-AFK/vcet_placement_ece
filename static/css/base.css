@@ -21,6 +21,19 @@
     
 }
 
+.timeDate {
+    margin-left:20px;
+    justify-content:center;
+    text-align:center;
+    font-family:Orbitron; 
+    font-size: 13px;
+    font-weight:700;
+}
+
+#liveTime {
+    font-size: 15.5px;
+}
+
 .background2 {
     background: rgb(0, 0, 70);
     background-blend-mode: darken;
@@ -36,8 +49,9 @@
 }
 
 .logo img {
-    width: 10px;
-    border-radius: 50px;
+    height: 40px; 
+    width:40px; 
+    margin-right:30px;
 }
 
 .nav-list {
