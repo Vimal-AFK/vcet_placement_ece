@@ -1,11 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Placement Cell of ECE</title>
-</head>
-<body>
-    <h1>home page</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+    
+
+    {% block content %}
+    <div class="content">
+
+        <div id="homeSection" class="content-section">
+            <h1>Home Content</h1>
+        </div>
+
+
+        <div id="materialsSection" class="content-section">
+           <h1> Materials Content</h1>
+        </div>
+
+
+        <div id="practiceSection" class="content-section">
+            <h1>Practice Content</h1>
+        </div>
+
+
+        <div id="assessmentsSection" class="content-section">
+            <h1>Assessments Content</h1>
+            <div class="form-container">
+                <h2>Enter the Test:</h2>
+                <form action="#" method="POST" class="form-box">
+                    <input type="text" placeholder="Type here..." id="single-input" name="input-text" required>
+                    <button type="submit" class="submit-button">Submit</button>
+                </form>
+            </div>
+        
+            
+
+        </div>
+
+
+        <div id="profileSection" class="content-section">
+            <h1>Profile Content</h1>
+        </div>
+
+
+        <div id="aboutSection" class="content-section">
+            <h1>About Content</h1>
+        </div>
+
+        
+    </div>
+    {% endblock %}

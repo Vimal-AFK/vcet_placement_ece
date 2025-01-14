@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VCET - ECE</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'images/favicon.jpeg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/assessment.css' %}">
+</head>
+
+<body onload="showSection('home')">
+
+    <nav class="navbar background1">
+
+        <div class="timeDateDiv" style="margin-left:20px; justify-content:center; text-align:center; font-family:Orbitron; font-size: 13px; font-weight:700;">
+            <div id="liveTime" style="font-size: 15.5px;"></div>
+            <div id="liveDate"></div>
+        </div>
+        
+        <div class="logo">
+            <img src="{% static 'images/Vcet_logo.png' %}" style="height: 40px; width:40px; margin-right:30px;" alt="VCET Logo">
+        </div>
+        <div class="center">
+        <h2>VELAMMAL COLLEGE OF ENGINEERING AND TECHNOLOGY</h2>
+        <h5>Department of Electronics and Communication Engineering</h5>
+        </div>
+
+        <div>
+            
+        </div>
+        <button id="enterFullscreen" class="fullscreen-btn">
+            <img src="{% static 'images/enter_full_screen_logo.png' %}" alt="Enter Fullscreen">
+        </button>
+    
+        <button id="exitFullscreen" class="fullscreen-btn" style="display: none;">
+            <img src="{% static 'images/exit_full_screen_logo.png' %}" alt="Exit Fullscreen">
+        </button>
+
+    </nav>
+
+    <nav class="navbar background2">
+        <ul class="nav-list">
+        <li><a id="home" class="active" onclick="showSection('home')">Home</a></li>
+        <li><a id="materials" onclick="showSection('materials')">Materials</a></li>
+        <li><a id="practice" onclick="showSection('practice')">Practice</a></li>
+        <li><a id="assessments" onclick="showSection('assessments')">Assessments</a></li>
+        <li><a id="profile" onclick="showSection('profile')">Profile</a></li>
+        <li><a id="about" onclick="showSection('about')">About</a></li>
+        </ul>
+        <div class="rightnav">
+            <h3><a href="#">Login</a></h3>
+        </div>    
+    </nav>
+
+    <div class="content_border">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+<script src="{% static 'js/base.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/assessment.js' %}"></script>
+
+</html>
