@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/test.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <div id="notice">
+        <h1>Test Information</h1>
+        <table>
+            <tr>
+                <th>Detail</th>
+                <th>Information</th>
+            </tr>
+            <tr>
+                <td>Test Code</td>
+                <td>0123</td>
+            </tr>
+            <tr>
+                <td>Test Name</td>
+                <td>Sample Test</td>
+            </tr>
+            <tr>
+                <td>Number of Questions</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Time Limit</td>
+                <td>30 minutes</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>This is a sample test to evaluate your knowledge and aptitude.</td>
+            </tr>
+        </table>
+        <button onclick="start()">Start Test</button>
+    </div>
+
+
+    <div id="test">
+
+        <div id="questions">
+            {% for question in questions %}
+            <div class="question">
+                <p>{{ forloop.counter }}. {{ question.question }}</p>
+                <div class="options">
+                    {% for option in question.options %}
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="question-{{ forloop.parentloop.counter }}"
+                            id="question-{{ forloop.parentloop.counter }}-option-{{ forloop.counter }}"
+                            value="{{ option }}"
+                        />
+                        <label for="question-{{ forloop.parentloop.counter }}-option-{{ forloop.counter }}">{{ option }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+
+        <div id="test-info">
+            
+            <div id="timer">Time Remaining: 00:00</div>
+            <div id="test-detail">
+                <span>Name : Vimal Raj N</span><br><hr>
+                <span>Test Code : 1234</span><br><hr>
+                <span>Test Name :XYZ</span><br><hr>
+                <span>No. of Qs : 60</span>
+            </div>
+            <div id="question-boxes">
+                <!-- Dynamic question boxes will be added here -->
+            </div>
+            <button id="submit-btn">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        const questionBoxesContainer = document.getElementById('question-boxes');
+        const numberOfQuestions = 60; 
+
+        for (let i = 1; i <= numberOfQuestions; i++) {
+            const box = document.createElement('div');
+            box.className = 'box';
+            box.textContent = i;
+            questionBoxesContainer.appendChild(box);
+        }
+    </script>
+
+    <script src="{% static 'js/test.js' %}"></script>
+</body>
+</html>

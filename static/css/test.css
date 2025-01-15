@@ -1,0 +1,229 @@
+#notice {
+    width: 50%;
+    margin: 150px auto;
+    padding: 20px;
+    background-color: rgb(188, 188, 234);
+    border: 3px solid rgb(0, 0, 70);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+#notice h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#notice table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#notice table th, #notice table td {
+    text-align: left;
+    padding: 10px;
+    border: 2px solid rgb(0, 0, 70);
+    background-color: white;
+}
+
+#notice table th {
+    background-color: rgba(223, 213, 213, 0.492);
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
+}
+
+#notice table td {
+    color: black;
+}
+
+#notice button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#notice button:hover {
+    background-color: #0056b3;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    
+}
+
+#test {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+#questions {
+    flex: 8;
+    background-color: rgba(0, 0, 70, 0.182); 
+    margin: 10px;
+    padding: 20px;
+    border: 3px solid rgb(0, 0, 70); 
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; 
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.question {
+    padding: 20px;
+    border: 2px solid #ccc; /* Neutral border for modern styling */
+    border-radius: 12px; /* Rounded corners for a polished look */
+    background: whitesmoke; /* Soft gradient for depth */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for floating effect */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover animations */
+}
+
+.question:hover {
+    transform: translateY(-3px); /* Gentle lift on hover */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.question p {
+    padding: 5px;
+    background-color: #0000000e;
+    border-radius: 5px;
+    width: max-content;
+    font-weight: 600;
+    font-size: 1.2rem; /* Slightly larger for emphasis */
+    color: black; /* Deep green for professionalism */
+    margin-bottom: 15px;
+    max-width: 1000px;
+}
+
+.option {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+}
+
+input[type="radio"] {
+    margin-right: 12px;
+    accent-color: #2e7d32; /* Modern color accent for radio buttons */
+    width: 18px; /* Larger clickable area */
+    height: 18px;
+    cursor: pointer;
+}
+
+label {
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+}
+
+label:hover {
+    color: #2e7d32; 
+}
+
+#questions::-webkit-scrollbar {
+    width: 7px; 
+}
+
+#questions::-webkit-scrollbar-thumb {
+    background: rgb(0, 0, 70);
+    border-radius: 1px;
+    
+}
+
+#questions::-webkit-scrollbar-thumb:hover {
+    background: rgb(0, 0, 70); 
+}
+
+#questions::-webkit-scrollbar-track {
+    background: rgba(0, 0, 70, 0.238); 
+}
+
+
+
+
+#test-info {
+    margin-left: 0px;
+    margin-bottom: 6px;
+    margin-right: 6px;
+    margin-top: 6px;
+    flex: 2;
+    background-color: rgba(14, 225, 28, 0.029);
+    border:3px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    padding: 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#timer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin: 10px;
+}
+
+#test-detail{
+    border: 2px solid black;
+    width:85%;
+    height: min-content;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#question-boxes {
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.box {
+    width: 34px;
+    height: 34px;
+    background-color: white;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+#submit-btn {
+    width: 90%;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: rgb(2, 0, 128);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: center;
+}

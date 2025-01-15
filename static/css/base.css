@@ -74,8 +74,9 @@
 }
 
 .nav-list li a:hover {
-    padding: 3px;
-    border-radius: 10px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 2px;
     color: rgb(0, 0, 0);
     background-color: #ffffff;
     transform: scale(1.1); 
@@ -86,7 +87,7 @@
 .nav-list li a.active {
     
     font-weight:600 ;
-    color: rgb(235, 10, 10);
+    color: rgb(0, 0, 0);
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 10px;
