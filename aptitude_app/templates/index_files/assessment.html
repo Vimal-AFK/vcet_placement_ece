@@ -1,0 +1,19 @@
+<form action="#" method="POST" class="test_code_form">
+    <div>
+        <h2>Enter the Test Code</h2>
+    </div>
+    <br>
+    <input type="number" placeholder="X X X X" name="input-text" min="0000" max="9999" required>
+    <button type="submit"><a href="{% url 'test' %}">Enter</a></button>
+</form>
+
+<div id="before_assess_warn">
+    {% load static %}
+    <img src="{% static 'images/warning.png' %}" alt="warning">
+    <ul>
+        <li>Enter the 4 Digit Code of the Test Paper</li>
+        <li>You can only use this Code one Time</li>
+        <li>After Enter into the full screen mode during the test dont Exit it</li>
+        <li>If you break the rules , you cant write this test Again</li>
+    </ul>
+</div>
