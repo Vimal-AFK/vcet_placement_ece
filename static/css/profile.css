@@ -1,0 +1,228 @@
+
+.profile-container {
+    position: absolute; 
+    top: 0; 
+    left: 0;
+    width: 250px;
+    height: calc(100% - 40px); 
+    background-color: rgb(188, 188, 234);
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 768px) {
+    .profile-container {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        top: 0;
+        left: 0;
+        border-right: none;
+        box-shadow: none;
+        transform: translateX(-100%); 
+    }
+
+    
+    .profile-container.active {
+        transform: translateX(0);
+    }
+}
+
+
+.profile-picture img {
+    width: 100%;
+    max-width: 150px; 
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: block;
+    border: 3px solid white;
+}
+
+/* Profile Details Styling */
+.profile-details h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.profile-details p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #555;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+/* Add icons for visual appeal */
+.profile-details p::before {
+    content: attr(data-icon); /* Use a custom data attribute for icons */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 8px;
+    color: #333;
+}
+
+
+.profile-container:hover {
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.toggle-btn {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+@media (max-width: 768px) {
+    .toggle-btn {
+        display: block;
+    }
+}
+
+
+
+
+.change-password {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.change-password h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #555;
+}
+
+
+
+
+
+
+
+.profileData-container {
+    position: absolute; /* Position relative to .content-section */
+    top: 0; /* Align with .profile-container */
+    left: 300px; /* Adjust based on .profile-container width + spacing */
+    right: 0;
+    width: calc(100% - 300px); /* Fill remaining space */
+    height: calc(100% - 40px); /* Adjust for margins/paddings */
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.box-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.box {
+    height: 130px;
+    width: 230px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 30, 87, 0.751);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  .box:hover {
+    transform: scale(1.08);
+  }
+  
+  .box:nth-child(1) {
+    background-color: var(--one-use-color);
+  }
+  .box:nth-child(2) {
+    background-color: var(--two-use-color);
+  }
+  .box:nth-child(3) {
+    background-color: var(--one-use-color);
+  }
+  .box:nth-child(4) {
+    background-color: var(--two-use-color);
+  }
+  
+  .box img {
+    height: 50px;
+  }
+  .box .text {
+    color: rgb(0, 0, 0);
+  }
+  .topic {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  
+  .topic-heading {
+    font-size: 30px;
+    letter-spacing: 3px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
