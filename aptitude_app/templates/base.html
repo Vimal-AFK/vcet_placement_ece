@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/assessment.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-    <link rel="stylesheet" href="{% static 'css/material.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/practice_and_material.css' %}">
 </head>
 
 <body onload="showSection('home')">
@@ -51,9 +52,13 @@
         <li><a id="profile" onclick="showSection('profile')">Profile</a></li>
         <li><a id="about" onclick="showSection('about')">About</a></li>
         </ul>
+    
         <div class="rightnav">
-            <h3><a href="#">Login</a></h3>
+            <h3><a href="{% url 'login' %}">Login</a></h3>
         </div>    
+        <div class="rightnav">
+            <h3><a href="#">(username)Logout</a></h3>
+        </div> 
     </nav>
 
     <div class="content_border">
@@ -67,6 +72,6 @@
 <script src="{% static 'js/assessment.js' %}"></script>
 <script src="{% static 'js/test.js' %}"></script>
 <script src="{% static 'js/profile.js' %}"></script>
-<script src="{% static 'js/material.js' %}"></script>
+<script src="{% static 'js/practice_and_material.js' %}"></script>
 
 </html>

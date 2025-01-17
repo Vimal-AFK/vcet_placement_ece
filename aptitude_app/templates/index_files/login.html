@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VCET - ECE</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'images/favicon.jpeg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body onload="showSection('home')" style="background: white;">
+
+    <nav class="navbar background1">
+
+        <div class="timeDate">
+            <div id="liveTime"></div>
+            <div id="liveDate"></div>
+        </div>
+        
+        <div class="logo">
+            <img src="{% static 'images/Vcet_logo.png' %}" alt="VCET Logo">
+        </div>
+        <div class="center">
+        <h2>VELAMMAL COLLEGE OF ENGINEERING AND TECHNOLOGY</h2>
+        <h5>Department of Electronics and Communication Engineering</h5>
+        </div>
+
+        <div>
+            
+        </div>
+        <button id="enterFullscreen" class="fullscreen-btn">
+            <img src="{% static 'images/enter_full_screen_logo.png' %}" alt="Enter Fullscreen">
+        </button>
+    
+        <button id="exitFullscreen" class="fullscreen-btn" style="display: none;">
+            <img src="{% static 'images/exit_full_screen_logo.png' %}" alt="Exit Fullscreen">
+        </button>
+
+    </nav>
+
+    <div class="content_border">
+        <div class="login-wrapper">
+            <div class="login-card">
+                <h2>Login</h2>
+                <form class="login-form">
+                    <div class="input-group">
+                        <input type="text" id="username" name="rollno" placeholder="Roll no:" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="{% static 'js/base.js' %}"></script>
+</html>

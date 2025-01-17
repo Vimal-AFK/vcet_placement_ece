@@ -4,6 +4,9 @@ from django.shortcuts import render
 def index (request):
     return render(request,'index.html')
 
+def login(request):
+    return render(request,'index_files/login.html')
+
 def test(request):
     questions_data = [
         {
@@ -27,4 +30,4 @@ def test(request):
             "options": ["Python", "JavaScript", "C++", "Java"],
         },
     ]
-    return render(request, 'test.html', {"questions": questions_data})
+    return render(request, 'test_activity/test.html', {"questions": questions_data})
