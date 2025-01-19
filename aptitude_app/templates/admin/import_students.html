@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <h2>Import Students</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Import</button>
+  </form>
+  <br>
+  <a href="{% url 'admin:download_template' %}" class="button">Download Excel Template</a>
+{% endblock %}

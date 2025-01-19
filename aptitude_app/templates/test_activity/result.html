@@ -81,15 +81,15 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Example row, replace with dynamic content -->
+            {% for result in results %}
             <tr>
-                <td>John Doe</td>
-                <td>Math Test</td>
-                <td>85</td>
-                <td>B</td>
-                <td>Good performance</td>
+                <td>{{ result.student.name }}</td>
+                <td>{{ result.test_code }}</td>
+                <td>{{ result.total_marks_scored }}</td>
+                <td>{{ result.percentage }}</td>
+                <td>{{ result.status }}</td>
             </tr>
-            <!-- Add more rows as needed -->
+            {% endfor %}
         </tbody>
     </table>
 </body>

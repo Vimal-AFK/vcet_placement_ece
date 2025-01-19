@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Batch(models.Model):
@@ -33,19 +34,19 @@ class Batch(models.Model):
         verbose_name_plural = "Batches"
 
     def __str__(self):
-        return f"{self.department} - Batch {self.batch_year} ({self.year}) - {self.total_strength}"
+        return f"{self.department} - Batch {self.batch_year} ({self.year}Year) - {self.total_strength}"
 
 
 class Student(models.Model):
     SECTION_CHOICES = [
-        ('A', 'Section A'),
-        ('B', 'Section B'),
-        ('C', 'Section C'),
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
     ]
 
     GENDER_CHOICES = [
-        ('M', 'Male'),
-        ('F', 'Female'),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
     ]
 
     batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name='students')
@@ -53,7 +54,7 @@ class Student(models.Model):
     roll_number = models.CharField(max_length=20, unique=True, db_index=True)
     section = models.CharField(max_length=1, choices=SECTION_CHOICES)
     date_of_birth = models.DateField()
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     password = models.CharField(max_length=128, editable=True)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
@@ -73,10 +74,14 @@ class Student(models.Model):
         return 0
 
     def save(self, *args, **kwargs):
-        self.average_percentage = self.calculate_average_percentage()
+        if self.pk:  # Check if the instance already exists
+            self.average_percentage = self.calculate_average_percentage()
         if not self.password:
             self.password = self.date_of_birth.strftime('%Y%m%d')
         super().save(*args, **kwargs)
+        if not self.pk:  # Calculate average percentage after saving the new instance
+            self.average_percentage = self.calculate_average_percentage()
+            super().save(update_fields=['average_percentage'])
 
     def __str__(self):
         return f"{self.name} ({self.roll_number}) - Batch {self.batch.batch_year}"
@@ -110,3 +115,72 @@ class Result(models.Model):
 
     def __str__(self):
         return f"Result: {self.student.name} - {self.test_code} ({self.percentage}%)"
+    
+from django.db import models
+import uuid
+
+
+class QuestionPaper(models.Model):
+    # Core fields
+    paper_code = models.CharField(
+        max_length=4, unique=True, editable=False, default=uuid.uuid4().hex[:4]
+    )
+    paper_title = models.CharField(max_length=255)
+    paper_description = models.TextField(blank=True, null=True)
+    time_limit = models.PositiveIntegerField(help_text="Time limit in minutes")
+    total_marks = models.PositiveIntegerField(default=0)  # Calculated dynamically
+    is_practice_paper = models.BooleanField(default=False)
+    is_assessment_paper = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.paper_title} ({self.paper_code})"
+
+    def calculate_total_marks(self):
+        self.total_marks = sum(q.mark for q in self.questions.all())
+        self.save()
+
+    def get_absolute_url(self):
+        return reverse('question_paper_preview', args=[str(self.id)])
+
+    class Meta:
+        verbose_name = "Question Paper"
+        verbose_name_plural = "Question Papers"
+
+
+class Question(models.Model):
+    # Link to QuestionPaper
+    question_paper = models.ForeignKey(
+        QuestionPaper, related_name='questions', on_delete=models.CASCADE, default=1
+    )
+    question_text = models.TextField(blank=True, null=True)
+    question_image = models.ImageField(upload_to='questions/', blank=True, null=True)
+    mark = models.PositiveIntegerField(default=1)
+
+    # MCQ fields
+    option_A = models.CharField(max_length=255, blank=True, null=True)
+    option_B = models.CharField(max_length=255, blank=True, null=True)
+    option_C = models.CharField(max_length=255, blank=True, null=True)
+    option_D = models.CharField(max_length=255, blank=True, null=True)
+    CORRECT_OPTION_CHOICES = [
+        ('A', 'Option A'),
+        ('B', 'Option B'),
+        ('C', 'Option C'),
+        ('D', 'Option D'),
+    ]
+    correct_option = models.CharField(
+        max_length=1, choices=CORRECT_OPTION_CHOICES, blank=True, null=True, help_text="Key of the correct option for MCQs."
+    )
+
+    def __str__(self):
+        return f"Question {self.id} for {self.question_paper.paper_code}"
+
+    def clean(self):
+        # Ensure MCQ fields are filled
+        if not self.option_A or not self.option_B or not self.option_C or not self.option_D or not self.correct_option:
+            raise ValueError("MCQs must have 4 options and a correct option.")
+
+    class Meta:
+        verbose_name = "Question"
+        verbose_name_plural = "Questions"
+
+
