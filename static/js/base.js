@@ -73,3 +73,13 @@ navLinks.forEach(link => {
     });
 });
 
+function showMessage() {
+    // Show the message
+    const messageDiv = document.getElementById("message");
+    messageDiv.style.display = "block"; // Make it visible
+
+    // Hide the message after 7 seconds
+    setTimeout(() => {
+        messageDiv.style.display = "none";
+    }, 7000); // 7000 milliseconds = 7 seconds
+}

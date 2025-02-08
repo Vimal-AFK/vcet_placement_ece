@@ -1,5 +1,5 @@
 .test_code_form {
-    top: 110px;
+    top: 10px;
     position: relative;
     height: fit-content;
     width: fit-content;
@@ -16,15 +16,21 @@
     
 }
 
+.test_code_form {
+    text-align: center; /* Center the content inside the form */
+}
+
 .test_code_form input[type="number"] {
-    width: 80%;
+    width: 40%;
     padding: 10px;
-    margin-bottom: 20px;
+    margin: 0 auto 20px; /* Center horizontally and give space at the bottom */
     border-radius: 5px;
     font-size: 20px;
-    text-align: center;
-    letter-spacing: 5px;
+    text-align: center; /* Center text inside the input */
+    letter-spacing: 10px;
+    display: block; /* Make the input a block-level element */
 }
+
 
 .test_code_form button {
     width: 50%;
@@ -42,14 +48,26 @@
     background-color: #0056b3; /* Darker blue on hover */
 }
 
+.ass-enter{
+    height: max-content; 
+    width: max-content; 
+    padding: 10px; 
+    background-color : rgb(0, 0, 70); 
+    color: rgb(255, 255, 255); 
+    border: none; 
+    border-radius: 5px; 
+    text-decoration:none;
+    margin-bottom: 10px;
+}
+
 #before_assess_warn {
-    top: 200px;
     position: relative;
     width: fit-content;
     height: max-content;
     place-self: center;
-    background-color: rgba(255, 0, 0, 0.268);
-    border: 3px solid rgb(110, 0, 0);
+    background: rgb(188, 188, 234);
+    background-blend-mode: darken;
+    border:3px solid rgb(0, 0, 70);
     border-radius: 7px;
     padding: 10px;
     text-align: center;

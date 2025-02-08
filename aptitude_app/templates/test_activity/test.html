@@ -8,89 +8,244 @@
     <title>Test</title>
 </head>
 <body>
-    <div id="notice">
-        <h1>Test Information</h1>
-        <table>
-            <tr>
-                <th>Detail</th>
-                <th>Information</th>
-            </tr>
-            <tr>
-                <td>Test Code</td>
-                <td>0123</td>
-            </tr>
-            <tr>
-                <td>Test Name</td>
-                <td>Sample Test</td>
-            </tr>
-            <tr>
-                <td>Number of Questions</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>Time Limit</td>
-                <td>30 minutes</td>
-            </tr>
-            <tr>
-                <td>Description</td>
-                <td>This is a sample test to evaluate your knowledge and aptitude.</td>
-            </tr>
-        </table>
-        <button onclick="start()">Start Test</button>
-    </div>
+
+    <div id="1nd_show" style="
+    display: block; 
+    padding: 30px; 
+    border: 2px solid #4CAF50; 
+    border-radius: 10px; 
+    background-color: #ffffff; 
+    text-align: center; 
+    max-width: 600px; 
+    margin: 50px auto; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+    font-family: Arial, sans-serif;">
+    <h2 style="color: #4CAF50; font-size: 26px; margin-bottom: 20px;">📋 Test Instructions</h2>
+    <p style="font-size: 16px; color: #555; margin-bottom: 20px;">Please read the instructions carefully before starting the test.</p>
+    <ul style="
+        text-align: left; 
+        font-size: 16px; 
+        line-height: 1.8; 
+        color: #333; 
+        margin: 0 auto 20px; 
+        padding: 0 20px; 
+        list-style-type: none;">
+        <li>🔒 <b>Stay in Full-Screen Mode:</b> Do not exit full-screen mode during the test.</li>
+        <li>⏳ <b>Time Limit:</b> The test will end automatically when the timer reaches zero.</li>
+        <li>✅ <b>Track Answers:</b> Answered questions will turn <span style="color: green; font-weight: bold;">green</span>.</li>
+        <li>❓ <b>Mark Doubts:</b> Doubt-marked questions will turn <span style="color: orange; font-weight: bold;">orange</span>.</li>
+        <li>⚠️ <b>Malpractice:</b> Exiting full-screen mode will result in test termination.</li>
+        <li>💾 <b>Submit:</b> Ensure all answers are saved before clicking submit.</li>
+    </ul>
+    <button 
+        onclick="start()" 
+        style="
+            padding: 12px 30px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            border: none; 
+            background-color: #4CAF50; 
+            color: white; 
+            border-radius: 5px; 
+            transition: background-color 0.3s; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        🚀 Start Test
+    </button>
+</div>
 
 
+<div id="2nd_show" style="display: none;">
     <div id="test">
-
         <div id="questions">
-            {% for question in questions %}
-            <div class="question">
-                <p>{{ forloop.counter }}. {{ question.question }}</p>
-                <div class="options">
-                    {% for option in question.options %}
-                    <div class="option">
-                        <input
-                            type="radio"
-                            name="question-{{ forloop.parentloop.counter }}"
-                            id="question-{{ forloop.parentloop.counter }}-option-{{ forloop.counter }}"
-                            value="{{ option }}"
-                        />
-                        <label for="question-{{ forloop.parentloop.counter }}-option-{{ forloop.counter }}">{{ option }}</label>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
+            <form id="test-form" method="post" action="{% url 'result' paper.paper_code %}">
+                {% csrf_token %}
+                <input type="hidden" name="time_taken" id="time-taken" value="0">
+                <input type="hidden" name="malpractice" id="malpractice" value="false">
+                {% for question in questions %}
+<div class="question">
+    <p>{{ forloop.counter }}. {{ question.question_text }}</p>
+    <ul>
+        <li>
+            <input type="radio" name="question_{{ question.id }}" value="A" onclick="markAnswered('{{ forloop.counter }}')">
+            A. {{ question.option_A }}
+        </li>
+        <li>
+            <input type="radio" name="question_{{ question.id }}" value="B" onclick="markAnswered('{{ forloop.counter }}')">
+            B. {{ question.option_B }}
+        </li>
+        <li>
+            <input type="radio" name="question_{{ question.id }}" value="C" onclick="markAnswered('{{ forloop.counter }}')">
+            C. {{ question.option_C }}
+        </li>
+        <li>
+            <input type="radio" name="question_{{ question.id }}" value="D" onclick="markAnswered('{{ forloop.counter }}')">
+            D. {{ question.option_D }}
+        </li>
+    </ul>
+    <button type="button" id="doubt-btn-{{ forloop.counter }}" class="doubt-btn" onclick="toggleDoubt('{{ forloop.counter }}')" style="background:'white' ;  color:white; ";
+            doubtBtn.style.color = 'black';">
+        ❓ Mark as Doubt
+    </button>
+</div>
+{% endfor %}
+
+            </form>
         </div>
-        
 
         <div id="test-info">
-            
-            <div id="timer">Time Remaining: 00:00</div>
+            <div id="timer">Time Remaining: <span id="time">00:00</span></div>
             <div id="test-detail">
-                <span>Name : Vimal Raj N</span><br><hr>
-                <span>Test Code : 1234</span><br><hr>
-                <span>Test Name :XYZ</span><br><hr>
-                <span>No. of Qs : 60</span>
+                <span>Name: Vimal Raj N</span><br><hr>
+                <span>Test Code: {{ paper.paper_code }}</span><br><hr>
+                <span>Test Name: {{ paper.paper_title }}</span><br><hr>
+                <span>No. of Qs: {{ paper.no_of_qs }}</span>
             </div>
             <div id="question-boxes">
                 <!-- Dynamic question boxes will be added here -->
             </div>
-            <button id="submit-btn">Submit</button>
+            <button type="submit" form="test-form" id="submit-btn" disabled>Submit</button>
         </div>
     </div>
+</div>
 
-    <script>
-        const questionBoxesContainer = document.getElementById('question-boxes');
-        const numberOfQuestions = 60; 
+<script>
+    let malpracticeInterval;
+    let timerInterval; // Declare timerInterval here
 
-        for (let i = 1; i <= numberOfQuestions; i++) {
-            const box = document.createElement('div');
-            box.className = 'box';
-            box.textContent = i;
-            questionBoxesContainer.appendChild(box);
+    // Create question boxes dynamically
+    const questionBoxesContainer = document.getElementById('question-boxes');
+    const numberOfQuestions = parseInt("{{ paper.no_of_qs }}", 10);
+    const submitBtn = document.getElementById('submit-btn');
+    let answeredQuestions = new Set(); // Tracks answered questions
+    let doubtQuestions = new Set(); // Tracks questions marked as doubt
+
+    // Create question boxes dynamically
+    for (let i = 1; i <= numberOfQuestions; i++) {
+        const box = document.createElement('div');
+        box.className = 'box';
+        box.id = `box-${i}`;
+        box.textContent = `Q${i}`;
+        box.style.backgroundColor = 'white'; // Default color
+        questionBoxesContainer.appendChild(box);
+    }
+
+    // Mark question as answered when a radio button is clicked
+    function markAnswered(questionId) {
+        const box = document.getElementById(`box-${questionId}`);
+        if (box) {
+            answeredQuestions.add(questionId);
+            updateBoxColor(box, questionId); // Update the color dynamically
+            checkAllAnswered(); // Check if all questions are answered
         }
-    </script>
+    }
+
+    // Toggle doubt status for a question
+    function toggleDoubt(questionId) {
+        const box = document.getElementById(`box-${questionId}`);
+        const doubtBtn = document.getElementById(`doubt-btn-${questionId}`);
+        if (doubtQuestions.has(questionId)) {
+            doubtQuestions.delete(questionId); // Remove from doubt list
+            doubtBtn.textContent = '❓ Mark as Doubt'; // Change button text
+            doubtBtn.style.background = 'white';
+            doubtBtn.style.color = 'black';
+        } else {
+            doubtQuestions.add(questionId); // Add to doubt list
+            doubtBtn.textContent = '✅ Remove Doubt'; // Change button text
+            doubtBtn.style.background = 'black';
+            doubtBtn.style.color = 'white';
+        }
+        updateBoxColor(box, questionId); // Update the color dynamically
+    }
+
+    // Update the color of a question box based on its status
+    function updateBoxColor(box, questionId) {
+        if (answeredQuestions.has(questionId) && doubtQuestions.has(questionId)) {
+            box.style.backgroundColor = 'orange'; // Doubt + Answered
+        } else if (doubtQuestions.has(questionId)) {
+            box.style.backgroundColor = 'red'; // Doubt only
+        } else if (answeredQuestions.has(questionId)) {
+            box.style.backgroundColor = 'green'; // Answered only
+        } else {
+            box.style.backgroundColor = 'white'; // Default (unanswered)
+        }
+        box.style.color = (answeredQuestions.has(questionId) || doubtQuestions.has(questionId)) ? 'white' : 'black';
+    }
+
+    // Check if all questions are answered and enable submit button
+    function checkAllAnswered() {
+        if (answeredQuestions.size === numberOfQuestions) {
+            submitBtn.disabled = false;
+            submitBtn.style.backgroundColor = 'green';
+            submitBtn.style.color = 'white';
+        }
+    }
+
+    // Enter full-screen mode
+    function enterFullScreen() {
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
+    }
+
+    // Check for malpractice (exit full-screen)
+    function checkFullScreen() {
+        if (!document.fullscreenElement &&
+            !document.mozFullScreenElement &&
+            !document.webkitFullscreenElement &&
+            !document.msFullscreenElement) {
+            document.getElementById('malpractice').value = 'true';
+            document.getElementById('test-form').submit();
+        }
+    }
+
+    function stopMalpracticeCheck() {
+        clearInterval(malpracticeInterval);
+    }
+
+    // Timer functionality
+    let timeLimit = parseInt("{{ paper.time_limit }}", 10) * 60;
+    const timerElement = document.getElementById('time');
+    const timeTakenElement = document.getElementById('time-taken');
+    let timeTaken = 0;
+
+    function updateTimer() {
+        const minutes = Math.floor(timeLimit / 60);
+        const seconds = timeLimit % 60;
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (timeLimit > 0) {
+            timeLimit--;
+            timeTaken++;
+            timeTakenElement.value = timeTaken;
+        } else {
+            clearInterval(timerInterval);
+            stopMalpracticeCheck();
+            alert('Time is up! Redirecting to the result page.');
+            document.getElementById('test-form').submit();
+        }
+    }
+
+    // Start the test
+    function start() {
+        document.getElementById('1nd_show').style.display = 'none';
+        document.getElementById('2nd_show').style.display = 'block';
+        enterFullScreen();
+        malpracticeInterval = setInterval(checkFullScreen, 2000);
+        timerInterval = setInterval(updateTimer, 1000); // Start the timer here
+    }
+
+    submitBtn.addEventListener('click', function () {
+        stopMalpracticeCheck();
+        document.getElementById('test-form').submit();
+    });
+</script>
 
     <script src="{% static 'js/test.js' %}"></script>
 </body>

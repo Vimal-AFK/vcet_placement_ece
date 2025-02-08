@@ -24,7 +24,8 @@ function showSection(section) {
     }
 }
 
-// Show the home section by default when the page loads
-window.onload = function() {
-    showSection('home');
-};
+// Show the correct section based on the URL hash when the page loads
+window.addEventListener('load', () => {
+    const section = window.location.hash.substring(1) || 'home';
+    showSection(section);
+});

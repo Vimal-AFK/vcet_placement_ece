@@ -67,6 +67,7 @@ html, body {
 #test {
     height: 100vh;
     width: 100vw;
+    
     display: flex;
     flex-direction: row;
 }
@@ -87,17 +88,17 @@ html, body {
 }
 
 .question {
+    margin: 5px;
     padding: 20px;
     border: 2px solid #ccc; /* Neutral border for modern styling */
     border-radius: 12px; /* Rounded corners for a polished look */
     background: whitesmoke; /* Soft gradient for depth */
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for floating effect */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover animations */
 }
 
+/* Remove the hover effect */
 .question:hover {
-    transform: translateY(-3px); /* Gentle lift on hover */
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    box-shadow: none; /* Remove enhanced shadow on hover */
 }
 
 .question p {
@@ -154,9 +155,6 @@ label:hover {
     background: rgba(0, 0, 70, 0.238); 
 }
 
-
-
-
 #test-info {
     margin-left: 0px;
     margin-bottom: 6px;
@@ -171,6 +169,8 @@ label:hover {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    padding-bottom: 60px; /* Space for the submit button */
 }
 
 #timer {
@@ -215,15 +215,46 @@ label:hover {
 }
 
 #submit-btn {
-    width: 90%;
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: rgb(2, 0, 128);
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    padding: 10px;
+    background-color: #00ff08;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    align-self: center;
+}
+
+#submit-btn:hover {
+    background-color: #45a049;
+}
+
+#submit-btn:disabled {
+    background-color: #ff0000; /* Change this to your desired color */
+    cursor: not-allowed;
+}
+
+.question button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 50px; /* Change this to your desired shape */
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.question button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.question button.active {
+    background-color: orange;
+    color: white;
 }

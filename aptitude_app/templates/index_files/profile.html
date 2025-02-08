@@ -5,63 +5,29 @@
     </div>
     <div class="profile-details">
         <h2>{{ student.name }}</h2>
-        <p data-icon="#️⃣"><strong>Roll No :</strong> {{ student.roll_number }}</p>
-        <p data-icon="🏫"><strong>Class :</strong> {{ student.batch.year }} {{ student.batch.department }}</p>
+        <p data-icon="#️⃣"><strong>University No :</strong> {{ student.university_number }}</p>
+        <p data-icon="#️⃣"><strong>Roll No :</strong> {{ student.username }}</p>
+        <p data-icon="🏫"><strong>Batch :</strong> {{ student.batch_year }} {{ student.batch.department }}</p>
         <p data-icon="🎂"><strong>DOB :</strong> {{ student.date_of_birth }}</p>
         <p data-icon="📧"><strong>Email :</strong> {{ student.email }}</p>
         <p data-icon="📞"><strong>Phone :</strong> {{ student.phone_number }}</p>
+        <p data-icon="📊"><strong>Average Mark :</strong> {{ student.average_percentage }}%</p>
+
     </div>
     <div class="change-password">
-        <button class="btn-change-password" onclick="openModal()">Change Password</button>
-    </div>
-    <div id="passwordModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2>Change Password</h2>
-            <form>
-                <label for="current-password">Current Password:</label>
-                <input type="password" id="current-password" name="current-password" required>
-                <label for="new-password">New Password:</label>
-                <input type="password" id="new-password" name="new-password" required>
-                <label for="confirm-password">Confirm Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password" required>
-                <div class="form-buttons">
-                    <button type="submit" class="submit-btn">Submit</button>
-                </div>
-            </form>
-        </div>
+        <a class="btn-change-password" href="{% url 'change_password' %}">Change Password</a>
     </div>
 </div>
 <div class="profileData-container">
-    <div class="box-container">
-        <div class="box">
-            <div class="text">
-                <h2 class="topic">{{ student.average_percentage }}%</h2>
-                <h2 class="topic-heading">Average</h2>
-            </div>
-            <img src="#" alt="">
-        </div>
-        <div class="box">
-            <div class="text">
-                <h2 class="topic">30/50</h2>
-                <h2 class="topic-heading">Practice</h2>
-            </div>
-            <img src="#" alt="">
-        </div>
-        <div class="box">
-            <div class="text">
-                <h2 class="topic">20/70</h2>
-                <h2 class="topic-heading">Assesments</h2>
-            </div>
-            <img src="#" alt="">
-        </div>
-    </div>
+    
     <div class="table-container">
         <table>
+            <caption>Test History</caption>
             <thead>
                 <tr>
                     <th>Sl.No</th>
                     <th>Date</th>
+                    <th>Time</th>
                     <th>Test Code</th>
                     <th>Test Name</th>
                     <th>Score</th>
@@ -70,15 +36,22 @@
                 </tr>
             </thead>
             <tbody>
-                {% for result in student.results.all %}
+                {% for result in results %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ result.date_of_exam }}</td>
+                    <td>{{ result.time }}</td>
                     <td>{{ result.test_code }}</td>
-                    <td>{{ result.test_name }}</td>
-                    <td>{{ result.total_marks_scored }}</td>
+                    <td>{{ result.test_title}}</td>
+                    <td>{{ result.percentage }}</td>
                     <td class="status-{{ result.status|lower }}">{{ result.status }}</td>
-                    <td>{{ result.malpractice }}</td>
+                    <td>
+                    {% if result.status == 'Malpractice' %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                        </td>
                 </tr>
                 {% endfor %}
             </tbody>

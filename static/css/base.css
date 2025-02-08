@@ -245,3 +245,9 @@ footer {
 body{
     background: rgb(0, 0, 70);   
 }
+
+#logout-button{
+    background-color: transparent;
+    border: none;
+}
+

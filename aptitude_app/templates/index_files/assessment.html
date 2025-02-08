@@ -1,19 +1,77 @@
-<form action="#" method="POST" class="test_code_form">
-    <div>
-        <h2>Enter the Test Code</h2>
-    </div>
-    <br>
-    <input type="number" placeholder="X X X X" name="input-text" min="0000" max="9999" required>
-    <button type="submit"><a href="{% url 'test' %}">Enter</a></button>
-</form>
+<div id="message" class="message">
+    {% for message in messages %}
+        <div class="{{ message.tags }}"> <!-- Dynamically add class for success, error, or warning -->
+            {% if message.tags == 'success' %}
+                🎉 {{ message }}
+            {% elif message.tags == 'error' %}
+                ❌ {{ message }}
+            {% elif message.tags == 'warning' %}
+                ⚠️ {{ message }}
+            {% else %}
+                {{ message }}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
 
 <div id="before_assess_warn">
     {% load static %}
     <img src="{% static 'images/warning.png' %}" alt="warning">
+
+    <form method="GET" action="{% url 'index' %}">
+        {% csrf_token %}
+        <input type="number" name="paper_code" id="test_code_form" required autocomplete="off" placeholder="Enter Test Code">
+        <button type="submit" class="ass-enter">Enter</button>
+    </form>
+
     <ul>
         <li>Enter the 4 Digit Code of the Test Paper</li>
-        <li>You can only use this Code one Time</li>
-        <li>After Enter into the full screen mode during the test dont Exit it</li>
-        <li>If you break the rules , you cant write this test Again</li>
+        <li>You can only use this Code one time</li>
+        <li>After entering full-screen mode during the test, don’t exit it</li>
+        <li>If you break the rules, you can’t write this test again</li>
     </ul>
 </div>
+
+<script>
+    // Hide the message after 7 seconds
+    window.onload = function() {
+        const messageDiv = document.getElementById("message");
+        if (messageDiv) {
+            setTimeout(function() {
+                messageDiv.style.opacity = '0'; // Fade out
+                setTimeout(() => messageDiv.style.display = "none", 500); // Hide after fade-out
+            }, 7000); // 7000 milliseconds = 7 seconds
+        }
+    };
+</script>
+
+<style>
+    .message {
+        height: auto;
+        width: max-content;
+        padding: 20px;
+        margin: 10px 0;
+        border-radius: 5px;
+        display: block;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+    }
+</style>

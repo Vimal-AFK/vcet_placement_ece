@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{% static 'css/practice_and_material.css' %}">
 </head>
 
-<body onload="showSection('home')">
+<body onload="initializeSPA()">
 
     <nav class="navbar background1">
 
@@ -46,21 +46,42 @@
 
     <nav class="navbar background2">
         <ul class="nav-list">
-        <li><a id="home" class="active" onclick="showSection('home')">Home</a></li>
-        <li><a id="materials" onclick="showSection('materials')">Materials</a></li>
-        <li><a id="practice" onclick="showSection('practice')">Practice</a></li>
-        <li><a id="assessments" onclick="showSection('assessments')">Assessments</a></li>
-        <li><a id="profile" onclick="showSection('profile')">Profile</a></li>
-        <li><a id="about" onclick="showSection('about')">About</a></li>
+        <li><a id="home" class="active" onclick="navigateTo('home')">Home</a></li>
+        <li><a id="materials" onclick="navigateTo('materials')">Materials</a></li>
+        <li><a id="practice" onclick="navigateTo('practice')">Practice</a></li>
+        {% if user.is_authenticated %}
+        <li><a id="chatpdf" onclick="navigateTo('chatpdf')">ChatPDF</a></li>
+        <li><a id="atscheck" onclick="navigateTo('atscheck')">ATScheck</a></li>
+        <li><a id="assessments" onclick="navigateTo('assessments')">Assessments</a></li>
+        <li><a id="profile" onclick="navigateTo('profile')">Profile</a></li>
+        {% endif %}
+        <li><a id="about" onclick="navigateTo('about')">About</a></li>
         </ul>
-    
+
+          
+
+        {% if request.user.is_authenticated %}
+
         <div class="rightnav">
-            <h3><a href="{% url 'login' %}">Login</a></h3>
-        </div>    
-        <div class="rightnav">
-            <h3><a href="#">(username)Logout</a></h3>
+            <form action="{% url 'logout' %}" method="post" >
+                {% csrf_token %}
+                <button type="submit" id="logout-button"><h3 ><a style="background-color : rgb(0, 0, 70);">({{user.name}})Logout</a></h3></button>
+            </form>
         </div> 
+
+        {% else %}
+
+
+        <div class="rightnav">
+            <h3><a href="{% url 'signup' %}">Signup</a>
+                <span style="color: white; font-size:1.0rem;">/</span><a href="{% url 'login' %}">Login</a></h3>
+            <h3></h3>
+        </div>  
+
+        {% endif %}
+            
     </nav>
+    
 
     <div class="content_border">
         {% block content %}
@@ -74,5 +95,40 @@
 <script src="{% static 'js/test.js' %}"></script>
 <script src="{% static 'js/profile.js' %}"></script>
 <script src="{% static 'js/practice_and_material.js' %}"></script>
+<script>
+    function initializeSPA() {
+        const section = window.location.hash.substring(1) || 'home';
+        showSection(section);
+        window.onpopstate = function(event) {
+            if (event.state && event.state.section) {
+                showSection(event.state.section);
+            }
+        };
+    }
+
+    function navigateTo(section) {
+        showSection(section);
+        history.pushState({ section: section }, '', `#${section}`);
+    }
+
+    function showSection(section) {
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(sec => sec.style.display = 'none');
+        const activeSection = document.getElementById(`${section}Section`);
+        if (activeSection) {
+            activeSection.style.display = 'block';
+        }
+        document.querySelectorAll('.nav-list a').forEach(link => link.classList.remove('active'));
+        const activeLink = document.getElementById(section);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+
+    window.addEventListener('load', () => {
+        const section = window.location.hash.substring(1) || 'home';
+        showSection(section);
+    });
+</script>
 
 </html>
