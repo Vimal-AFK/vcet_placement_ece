@@ -8,6 +8,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <div class="vcet_bg">
+        <h1>stories</h1>
+        {% for placementStories in story %}
+            <h2>story.company</h2>
+            <h2>story.title</h2>
+            <h2>story.content</h2>
+        {% endfor %}
+            
         {% load static %}
         <img src="{% static 'images/Vcet_logo.png' %}" alt="vcet_logo" id="v_bg">
         <div class="home-txt"><br>

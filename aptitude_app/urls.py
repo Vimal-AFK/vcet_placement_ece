@@ -17,3 +17,10 @@ urlpatterns = [
     path('test/<str:paper_code>/', views.test, name='test'),
     path('result/<str:paper_code>/', views.result, name='result'),
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

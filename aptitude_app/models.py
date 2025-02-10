@@ -68,7 +68,6 @@ class Question(models.Model):
 # Model for Materials uploaded
 class Material(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
     file = models.FileField(upload_to='materials/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
@@ -114,3 +113,18 @@ class GlobalSettings(models.Model):
 
     def __str__(self):
         return "Global Settings"
+    
+class placement_stories(models.Model):
+    title = models.CharField(max_length=255)
+    company = models.CharField(max_length=255)
+    package = models.CharField(max_length=255)
+    content = models.TextField(max_length=10000)
+    image = models.ImageField(upload_to='placement_stories/', blank=True, null=True)
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Placement Story"
+        verbose_name_plural = "Placement Stories"

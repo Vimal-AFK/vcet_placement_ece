@@ -159,3 +159,4 @@ AUTH_USER_MODEL = 'authentication.User'
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
+

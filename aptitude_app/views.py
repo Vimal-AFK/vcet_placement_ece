@@ -2,9 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.utils import timezone
 from .forms import PaperCodeForm, UserForm
-from .models import QuestionPaper, Material, StudentResults, GlobalSettings
+from .models import QuestionPaper, Material, StudentResults, GlobalSettings , placement_stories
 from authentication.models import User
-
+from django.core.paginator import Paginator
+import PyPDF2
+from django.shortcuts import render
+from django.core.files.storage import FileSystemStorage
 
 def index(request):
     settings, _ = GlobalSettings.objects.get_or_create(id=1)
@@ -31,10 +34,12 @@ def index(request):
         student_results = StudentResults.objects.filter(user=request.user)
         if student_results.exists():  
             user_data.average_percentage = sum(result.percentage for result in student_results) / student_results.count()
-        else:
+            user_data.save()
+        else:   
             user_data.average_percentage = 0  
+            user_data.save()
 
-    
+    stories = placement_stories.objects.all()
 
     context = {
         'paper_form': PaperCodeForm(),
@@ -45,6 +50,7 @@ def index(request):
         'about_us_text': settings.about_us,
         'signup_enabled': settings.signup_option,
         'user_data': user_data,
+        'placementStories' : placement_stories.objects.all(),
     }
     return render(request, 'index.html', context)
 
@@ -131,3 +137,4 @@ def result(request, paper_code):
 
     messages.error(request, 'Invalid request.')
     return redirect('index')
+
