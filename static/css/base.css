@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: poppins;
 }
 
 .navbar {
@@ -239,7 +240,7 @@ footer {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.1)
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 body{
