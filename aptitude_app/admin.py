@@ -5,31 +5,29 @@ import pandas as pd
 from .models import QuestionPaper, Question, Material, StudentResults, GlobalSettings , placement_stories
 
 
-# Admin site customization
+
 admin.site.site_header = "ECE Placement Cell"
 admin.site.site_title = "ECE Placement Cell Portal"
 admin.site.index_title = "Welcome to the ECE Placement Cell Admin Panel"
 
 
-# Inline for adding Questions to a QuestionPaper in one form
+
 class QuestionInline(admin.StackedInline):
     model = Question
-    extra = 0  # No extra blank question forms by default
+    extra = 0  
 
 
-# Admin configuration for QuestionPaper
 @admin.register(QuestionPaper)
 class QuestionPaperAdmin(admin.ModelAdmin):
     list_display = (
         'paper_code',
         'paper_title',
         'time_limit',
+        'no_of_qs',
         'total_marks',
-        'is_practice_paper',
-        'is_assessment_paper',
     )
     search_fields = ('paper_code', 'paper_title')
-    list_filter = ('is_practice_paper', 'is_assessment_paper')
+    list_filter = ('paper_code','paper_title')
     inlines = [QuestionInline]
     ordering = ('paper_code',)
     fieldsets = (
@@ -37,26 +35,36 @@ class QuestionPaperAdmin(admin.ModelAdmin):
             'fields': ('paper_code', 'paper_title', 'paper_description')
         }),
         ('Settings', {
-            'fields': ('time_limit', 'no_of_qs', 'total_marks', 'is_practice_paper', 'is_assessment_paper')
+            'fields': ('time_limit', 'no_of_qs', 'total_marks')
         }),
     )
 
 
-# Admin configuration for Question
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = (
-        'question_paper',
-        'question_text',
-        'mark',
-        'correct_option',
-    )
+    list_display = ('question_paper', 'serial_number','question_text', 'mark', 'get_correct_answer')
     search_fields = ('question_text',)
-    list_filter = ('question_paper',)
+    list_filter = ('question_paper', 'question_paper__paper_code')  
     ordering = ('question_paper',)
 
+    def serial_number(self, obj):
+        return list(self.model.objects.all()).index(obj) + 1
+    
+    serial_number.short_description = 'S.No'
 
-# Admin configuration for Material uploads
+    def get_correct_answer(self, obj):
+        correct_option_mapping = {
+            'A': obj.option_A,
+            'B': obj.option_B,
+            'C': obj.option_C,
+            'D': obj.option_D,
+        }
+        return correct_option_mapping.get(obj.correct_option, "N/A")
+    
+    get_correct_answer.short_description = 'Correct Answer'
+
+
+
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
     list_display = ('file','title', 'uploaded_at')
@@ -64,7 +72,6 @@ class MaterialAdmin(admin.ModelAdmin):
     ordering = ('-uploaded_at',)
 
 
-# Admin configuration for StudentResults
 @admin.register(StudentResults)
 class StudentResultsAdmin(admin.ModelAdmin):
     list_display = (
@@ -82,7 +89,6 @@ class StudentResultsAdmin(admin.ModelAdmin):
     actions = ['export_as_excel']
     date_hierarchy = 'date_of_exam'
 
-    # Custom method to display percentage
     def percentage_display(self, obj) -> str:
         """Format percentage for display."""
         return f"{obj.percentage:.2f}%"
@@ -107,11 +113,11 @@ class StudentResultsAdmin(admin.ModelAdmin):
         data = [
             {
                 "University Number": result.user.university_number,
+                "Roll Number" : result.user.roll_number,
                 "Name": result.user.name,
                 "User": result.user.username,
                 "Test Code": result.test_code,
                 "Percentage": f"{result.percentage:.2f}%",
-                "Attended": "Yes" if result.attended else "No",
                 "Status": result.status,
                 "Date of Exam": result.date_of_exam.strftime('%Y-%m-%d'),
                 "Time": result.time.strftime('%H:%M:%S'),

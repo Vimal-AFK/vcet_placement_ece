@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 import datetime
 
-# Model for Question Paper
+
 class QuestionPaper(models.Model):
     paper_code = models.CharField(max_length=10, unique=True)
     paper_title = models.CharField(max_length=255)
@@ -11,8 +11,8 @@ class QuestionPaper(models.Model):
     time_limit = models.PositiveIntegerField(help_text="Time limit in minutes")
     no_of_qs = models.PositiveIntegerField(blank=True, null=True)
     total_marks = models.PositiveIntegerField(blank=True, null=True)
-    is_practice_paper = models.BooleanField(default=False)
-    is_assessment_paper = models.BooleanField(default=False)
+    is_practice_paper = models.BooleanField(default=True)
+    is_assessment_paper = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.paper_title} ({self.paper_code})"
@@ -25,7 +25,7 @@ class QuestionPaper(models.Model):
         verbose_name_plural = "Question Papers"
 
 
-# Model for Questions in a Paper
+
 class Question(models.Model):
     question_paper = models.ForeignKey(
         QuestionPaper, related_name='questions', on_delete=models.CASCADE
@@ -33,7 +33,7 @@ class Question(models.Model):
     question_text = models.TextField()
     mark = models.PositiveIntegerField(default=1)
 
-    # Fields for multiple-choice options
+
     option_A = models.CharField(max_length=255)
     option_B = models.CharField(max_length=255)
     option_C = models.CharField(max_length=255)
@@ -65,7 +65,6 @@ class Question(models.Model):
         verbose_name_plural = "Questions"
 
 
-# Model for Materials uploaded
 class Material(models.Model):
     title = models.CharField(max_length=255)
     file = models.FileField(upload_to='materials/')
@@ -82,14 +81,12 @@ class Material(models.Model):
         verbose_name_plural = "Materials"
 
 
-# Model for Student Results
 class StudentResults(models.Model):
     STATUS_CHOICES = [
         ('Completed', 'Completed'),
         ('Malpractice', 'Malpractice'),
     ]
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='results')
-    # Set a default value for test_code to fix the nullable issue.
     test_title = models.CharField(max_length=255, default='')
     test_code = models.CharField(max_length=10, default='')  
     percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0)

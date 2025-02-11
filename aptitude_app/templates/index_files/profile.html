@@ -1,60 +1,62 @@
-<div class="profile-container">
-    <div class="profile-picture">
-        {% load static %}
-        <img src="{% static 'images/user.png' %}" alt="Profile Picture">
-    </div>
-    <div class="profile-details">
-        <h2>{{ student.name }}</h2>
-        <p data-icon="#️⃣"><strong>University No :</strong> {{ student.university_number }}</p>
-        <p data-icon="#️⃣"><strong>Roll No :</strong> {{ student.username }}</p>
-        <p data-icon="🏫"><strong>Batch :</strong> {{ student.batch_year }} {{ student.batch.department }}</p>
-        <p data-icon="🎂"><strong>DOB :</strong> {{ student.date_of_birth }}</p>
-        <p data-icon="📧"><strong>Email :</strong> {{ student.email }}</p>
-        <p data-icon="📞"><strong>Phone :</strong> {{ student.phone_number }}</p>
-        <p data-icon="📊"><strong>Average Mark :</strong> {{ student.average_percentage }}%</p>
-
-    </div>
-    <div class="change-password">
-        <a class="btn-change-password" href="{% url 'change_password' %}">Change Password</a>
-    </div>
-</div>
-<div class="profileData-container">
+<div class="PROFILE">
+    <div class="profile-container">
+        <div class="profile-picture">
+            {% load static %}
+            <img src="{% static 'images/user.png' %}" alt="Profile Picture">
+        </div>
+        <div class="profile-details">
+            <h2>{{ student.name }}</h2>
+            <p data-icon="#️⃣"><strong>University No :</strong> {{ student.university_number }}</p>
+            <p data-icon="#️⃣"><strong>Roll No :</strong> {{ student.username }}</p>
+            <p data-icon="🏫"><strong>Batch :</strong> {{ student.batch_year }} {{ student.batch.department }}</p>
+            <p data-icon="🎂"><strong>DOB :</strong> {{ student.date_of_birth }}</p>
+            <p data-icon="📧"><strong>Email :</strong> {{ student.email }}</p>
+            <p data-icon="📞"><strong>Phone :</strong> {{ student.phone_number }}</p>
+            <p data-icon="📊"><strong>Average Mark :</strong> {{ student.average_percentage }}%</p>
     
-    <div class="table-container">
-        <table>
-            <caption>Test History</caption>
-            <thead>
-                <tr>
-                    <th>Sl.No</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Test Code</th>
-                    <th>Test Name</th>
-                    <th>Score</th>
-                    <th>Status of Completion</th>
-                    <th>Malpractice</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for result in results %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ result.date_of_exam }}</td>
-                    <td>{{ result.time }}</td>
-                    <td>{{ result.test_code }}</td>
-                    <td>{{ result.test_title}}</td>
-                    <td>{{ result.percentage }}</td>
-                    <td class="status-{{ result.status|lower }}">{{ result.status }}</td>
-                    <td>
-                    {% if result.status == 'Malpractice' %}
-                        Yes
-                    {% else %}
-                        No
-                    {% endif %}
-                        </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        </div>
+        <div class="change-password">
+            <a class="btn-change-password" href="{% url 'change_password' %}">Change Password</a>
+        </div>
+    </div>
+    <div class="profileData-container">
+        
+        <div class="table-container">
+            <table>
+                <caption>Test History</caption>
+                <thead>
+                    <tr>
+                        <th>Sl.No</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Test Code</th>
+                        <th>Test Name</th>
+                        <th>Score</th>
+                        <th>Status of Completion</th>
+                        <th>Malpractice</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ result.date_of_exam }}</td>
+                        <td>{{ result.time }}</td>
+                        <td>{{ result.test_code }}</td>
+                        <td>{{ result.test_title}}</td>
+                        <td>{{ result.percentage }}</td>
+                        <td class="status-{{ result.status|lower }}">{{ result.status }}</td>
+                        <td>
+                        {% if result.status == 'Malpractice' %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                            </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

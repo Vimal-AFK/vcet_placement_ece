@@ -38,37 +38,7 @@
                 <form method='POST' action="{% url 'login' %}">
                     {% csrf_token %}
                     {{form.as_p}}
-                    <style>
-                        p > input {
-                            padding: 10px;
-                            margin-bottom: 10px;
-                            font-size: larger;
-                            width: 200px;
-                        }
-                        p > label {
-                            font-size: large;
-                            margin-bottom: 5px;
-                            font-family: poppins;
-                        }
-                        p > fieldset {
-                            border: 7px solid red;
-                            background-color: red;
-                        }
-                        .errorlist {
-                            font-family: poppins;
-                            color: rgb(0, 0, 0);
-                            font-size: medium;
-                            border-radius: 5px;
-                            border: 1px solid red;
-                            background-color: rgb(255, 133, 133);
-                            padding: 10px;
-                            text-align: left;
-                            margin: 10px;
-                            list-style-type: none;
-                        }
-
-
-                    </style>
+                    
                     <button type="submit" class="btn">Login</button>
                 </form>
             </div>

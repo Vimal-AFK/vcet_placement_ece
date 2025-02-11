@@ -4,16 +4,12 @@ from django.utils import timezone
 from .forms import PaperCodeForm, UserForm
 from .models import QuestionPaper, Material, StudentResults, GlobalSettings , placement_stories
 from authentication.models import User
-from django.core.paginator import Paginator
-import PyPDF2
 from django.shortcuts import render
-from django.core.files.storage import FileSystemStorage
 
 def index(request):
     settings, _ = GlobalSettings.objects.get_or_create(id=1)
     user_data = None
 
-    # Handle paper code validation
     if request.method == 'GET' and 'paper_code' in request.GET:
         form = PaperCodeForm(request.GET)
         if form.is_valid():
@@ -84,15 +80,26 @@ def notice(request, paper_code):
 
     return render(request, 'test_activity/notice.html', {'paper': paper})
 
+from django.shortcuts import render, get_object_or_404
+from .models import StudentResults, QuestionPaper  # Assuming you have a QuestionPaper model
+
 def test(request, paper_code):
     """
-    Renders the test page with questions.
+    Renders the test page with questions and checks if the user has already attended.
     """
     paper = get_object_or_404(QuestionPaper, paper_code=paper_code)
-    return render(request, 'test_activity/test.html', {
+    
+    # Check if the user has already attended the test
+    attend = StudentResults.objects.filter(user=request.user, test_code=paper_code).exists()
+
+    
+    context = {
+        'attend': attend,
         'paper': paper,
-        'questions': paper.questions.all(),
-    })
+        'questions': paper.questions.all(),  # Assuming questions are related to QuestionPaper
+    }
+    print(attend)
+    return render(request, 'test_activity/test.html', context)
 
 def result(request, paper_code):
     """
@@ -131,7 +138,7 @@ def result(request, paper_code):
             'percentage': percentage,
             'time_taken': time_taken,
             'malpractice': malpractice,
-            'redirect_timeout': 10,
+            'redirect_timeout': 7,
         }
         return render(request, 'test_activity/result.html', context)
 

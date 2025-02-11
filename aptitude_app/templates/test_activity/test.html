@@ -3,11 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="icon" href="{% static 'images/favicon.jpeg' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/test.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>Test - {{paper.paper_code}}</title>
     <style>
-        /* Additional CSS for paginator and question cards */
+       
         .question-card {
             height: max-content;
             width: max-content;
@@ -139,7 +141,13 @@
                 <div class="question-boxes">
                     <!-- Dynamic question boxes will be added here -->
                 </div>
+                
+                {% if attend %}
+                    <h3>🔒Locked🔒</h3>
+                {% else %}
                 <button type="submit" form="test-form" id="submit-btn" disabled>Submit</button>
+                {% endif %}
+                    
             </div>
         </div>
     </div>
@@ -153,6 +161,8 @@
         const questionBoxesContainer = document.querySelector('.question-boxes');
         const answeredQuestions = new Set();
         const doubtQuestions = new Set();
+
+        
 
         // Initialize question boxes
         for (let i = 1; i <= totalQuestions; i++) {
@@ -246,6 +256,8 @@
             }
         }
 
+        
+
         // Start the test
         function start() {
             document.getElementById('1st_show').style.display = 'none';
@@ -317,6 +329,29 @@
         function stopMalpracticeCheck() {
             clearInterval(malpracticeInterval);
         }
+
+        let formSubmitted = false; // Flag to track form submission
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden' && !formSubmitted) {
+                console.log('Tab is hidden.');
+                document.getElementById('malpractice').value = 'true';
+                document.getElementById('test-form').submit();
+                formSubmitted = true; // Set flag to true after submission
+            } else {
+                console.log('Tab is visible.');
+            }
+        });
+
+        setInterval(() => {
+            if('{{attend}}' == 'True'){
+                alert("This Trick will not work")
+                window.location.href = "{% url 'index' %}#profile";
+            }
+        }, 1000);  
+        
+
+
     </script>
 
     <script src="{% static 'js/test.js' %}"></script>
