@@ -2,15 +2,18 @@
 {% load static %}
 <html lang="en">
 <head>
+    {% load static %}
+    <link rel="icon" href="{% static 'images/favicon.jpeg' %}" type="image/x-icon">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/test.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>{{paper.paper_code}}</title>
 </head>
 <body>
+    <br><br>
     <div id="notice">
         <h1>Test Information</h1>
-        <table style="max-width: 10px;">
+        <table >
             <tr>
                 <th>Detail</th>
                 <th>Information</th>
@@ -43,18 +46,14 @@
         {% if not result.attended %}
         <form action="{% url 'test' paper.paper_code %}" id="start-test-form">
             {% csrf_token %}
-            <button type="button" id="start-test-button">Start Test</button>
+            <button type="submit"  id="start-test-button">Start Test</button>
         </form>
         {% else %}
         <p>You have already attended this test.</p>
         {% endif %}
     </div>
-
+    <br><br>
     <script src="{% static 'js/test.js' %}"></script>
-    <script>
-        document.getElementById('start-test-button').addEventListener('click', function() {
-            document.getElementById('start-test-form').submit();
-        });
-    </script>
 </body>
+
 </html>

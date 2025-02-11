@@ -1,4 +1,7 @@
-// Get the buttons
+
+
+
+
 const enterFullscreenButton = document.getElementById('enterFullscreen');
 const exitFullscreenButton = document.getElementById('exitFullscreen');
 

@@ -3,112 +3,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if malpractice %}Malpractice Detected{% else %}Test Result{% endif %}</title>
     <link rel="stylesheet" href="{% static 'css/result.css' %}">
 </head>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Arial', sans-serif;
-    }
-    
-    body {
-        background-color: #000000;
-        display: flex;
-        flex-direction: row; /* Set flex direction to column */
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        overflow: hidden; /* Prevent scrolling */
-        position: relative;
-    }
-    
-    #result-card {
-        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-        padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        max-width: 600px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-    
-    h1 {
-        font-size: 2.5em;
-        color: #fff;
-        margin-bottom: 20px;
-    }
-    
-    .result-info {
-        margin: 20px 0;
-        font-size: 1.1em;
-        color: #000000;
-        text-align: left;
-    }
-    
-    .result-info p {
-        margin-bottom: 10px;
-    }
-    
-    .feedback {
-        margin-top: 30px;
-        font-size: 1.2em;
-        color: #fff;
-    }
-    
-    .feedback p {
-        font-weight: normal;
-    }
-    
-    .actions {
-        margin-top: 30px;
-    }
-    
-    .btn {
-        background-color: #ffffff;
-        color: rgb(0, 0, 0);
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 1.1em;
-        margin-right: 15px;
-        transition: all 0.3s ease;
-    }
-    
-    .btn:hover {
-        background-color: #000000;
-        color: #ffffff;
-    }
-    
-    .retry-btn {
-        background-color: #f44336;
-    }
-    
-    .retry-btn:hover {
-        background-color: #e53935;
-    }
-    
-    #feedback-text {
-        margin-top: 15px;
-        font-style: italic;
-        color: #fff;
-    }
-    
-</style>
+
 <body>
     <div id="result-card" {% if malpractice %}style="background: red;"{% endif %} >
         <h1>{% if malpractice %}Malpractice Detected{% else %}Test Result{% endif %}</h1>
-        <div class="result-info">
-            
-            
-                
+        <div class="result-info">     
             <p><strong>Test Code:</strong> {{ paper.paper_code }}</p>
             <p><strong>Test Name:</strong> {{ paper.paper_title }}</p>
             <p><strong>Your Score:</strong> {{ score }} / {{ total_marks }}</p>
@@ -133,7 +37,7 @@
         <div class="feedback">
             <p><strong>Feedback:</strong></p>
             <div id="feedback-text">
-                <p>Thirutha Mattila ne !</p>
+                <p>Malpractice will not be tolerated. If you wants to take test again , concern with admin.</p>
             </div>
         {% endif %}
         
@@ -146,11 +50,16 @@
         // Clear browser history
         history.pushState(null, null, location.href);
         window.onpopstate = function () {
-            history.go(1);
+            history.go(-3);
         };
 
-        // Countdown and redirect
-        let countdown = "{{ redirect_timeout }}";
+        let time_out = "{{ redirect_timeout }}";
+
+        if  ('{{malpractice}}' == 'True' ){
+            time_out = 3;
+        }
+
+        let countdown = time_out;
         const countdownElement = document.getElementById('countdown');
         countdownElement.innerText = `Redirecting in ${countdown} seconds...`;
 

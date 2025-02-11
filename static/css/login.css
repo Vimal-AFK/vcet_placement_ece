@@ -45,3 +45,37 @@
     border: 2px solid rgb(0, 0, 70);
     color: rgb(0, 0, 70);
 }
+
+p > input {
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: larger;
+    width: 200px;
+    border-radius: 7px;
+    border: 1px solid black;
+    
+}
+p > label {
+    width: 100px;
+    font-size: large;
+    margin-bottom: 5px;
+    font-family: poppins;
+}
+p > fieldset {
+    border: 7px solid red;
+    background-color: red;
+}
+.errorlist {
+    font-family: poppins;
+    color: rgb(0, 0, 0);
+    font-size: medium;
+    border-radius: 5px;
+    border: 1px solid red;
+    background-color: rgb(255, 133, 133);
+    padding: 10px;
+    text-align: left;
+    margin: 10px;
+    list-style-type: none;
+}
+
+

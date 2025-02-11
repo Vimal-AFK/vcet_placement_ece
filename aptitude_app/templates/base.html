@@ -48,10 +48,7 @@
         <ul class="nav-list">
         <li><a id="home" class="active" onclick="navigateTo('home')">Home</a></li>
         <li><a id="materials" onclick="navigateTo('materials')">Materials</a></li>
-        <li><a id="practice" onclick="navigateTo('practice')">Practice</a></li>
         {% if user.is_authenticated %}
-        <li><a id="chatpdf" onclick="navigateTo('chatpdf')">ChatPDF</a></li>
-        <li><a id="atscheck" onclick="navigateTo('atscheck')">ATScheck</a></li>
         <li><a id="assessments" onclick="navigateTo('assessments')">Assessments</a></li>
         <li><a id="profile" onclick="navigateTo('profile')">Profile</a></li>
         {% endif %}
