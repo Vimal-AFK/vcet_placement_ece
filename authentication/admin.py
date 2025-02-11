@@ -1,6 +1,6 @@
 import pandas as pd
 from django.contrib import admin, messages
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import User
 
 

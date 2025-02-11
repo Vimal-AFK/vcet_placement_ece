@@ -137,8 +137,12 @@ class StudentResultsAdmin(admin.ModelAdmin):
 # Admin configuration for GlobalSettings
 @admin.register(GlobalSettings)
 class GlobalSettingsAdmin(admin.ModelAdmin):
-    list_display = ('about_us', 'signup_option')
-    list_editable = ('signup_option',)  # Allow editing directly from the list view
+    list_display = ('about_us', 'signup_option','notice_board')  # Fields shown in the list view
+    list_editable = ('notice_board',)  # Allow editing directly from the list view
 
 
-admin.site.register(placement_stories)
+@admin.register(placement_stories)  # Corrected model name
+class placement_storiesAdmin(admin.ModelAdmin):
+    list_display = ('title', 'company', 'package', 'date')  # Fields shown in the list view
+    list_filter = ('company', 'date')  # Filters for easier navigation
+    search_fields = ('title', 'company')  # Search functionality

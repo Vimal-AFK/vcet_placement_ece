@@ -110,7 +110,8 @@ from django.db import models
 class GlobalSettings(models.Model):
     signup_option = models.BooleanField(default=False)  
     about_us = models.TextField(max_length=10000, default="Velammal")  
-
+    notice_board = models.TextField(max_length=10000, default="Evaluate and sharpen your logical, numerical, and verbal reasoning abilities.")  
+    
     def __str__(self):
         return "Global Settings"
     

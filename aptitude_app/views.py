@@ -49,6 +49,7 @@ def index(request):
         'results': StudentResults.objects.filter(user=request.user) if request.user.is_authenticated else None,
         'about_us_text': settings.about_us,
         'signup_enabled': settings.signup_option,
+        'notice_board_text': settings.notice_board,
         'user_data': user_data,
         'placementStories' : placement_stories.objects.all(),
     }
