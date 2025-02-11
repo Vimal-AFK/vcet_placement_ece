@@ -175,7 +175,7 @@ label:hover {
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding-bottom: 60px; /* Space for the submit button */
+    padding-bottom: 60px; 
 }
 
 #timer {
