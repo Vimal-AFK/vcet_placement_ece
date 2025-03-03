@@ -1,21 +1,10 @@
 <div class="home-main">
     <!-- Admin Panel Button -->
-<a href="{% url 'admin:index' %}" class="btn btn-dark rounded-circle position-fixed d-flex align-items-center justify-content-center" >
- <i class="bi bi-gear-fill" style="font-size: 2.0rem; color: rgb(0, 0, 70); top:auto; bottom:auto;"></i> <!-- White gear icon -->
-</a>
-
 <!-- Bootstrap 5 Icons CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <div id="notice-container">
-        <h1>Notice Board</h1>
-        <br>
-        <p>
-        {{ notice_board_text | linebreaks }}
-        </p>
-    </div>
-    <br>
+    
     <div class="vcet_bg">
-        <div class="placement-stories-section">
+        <div class="placement-stories-section">   
             <h1 class="section-title">Placement Stories</h1>
             <div class="stories-container">
                 {% for story in placementStories %}

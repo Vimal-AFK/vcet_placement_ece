@@ -7,18 +7,18 @@
 }
 
 body {
-    background-color: #000000;
+    background-color: rgba(240, 240, 240, 0.822);
     display: flex;
-    flex-direction: row; /* Set flex direction to column */
+    flex-direction: row; 
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden; /* Prevent scrolling */
+    overflow: hidden; 
     position: relative;
 }
 
 #result-card {
-    background-color: rgb(78, 214, 78);
+    background-color:  rgb(112, 112, 187) ;
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -33,7 +33,7 @@ body {
 
 h1 {
     font-size: 2.5em;
-    color: #fff;
+    color: #ffffff;
     margin-bottom: 20px;
 }
 
@@ -51,7 +51,7 @@ h1 {
 .feedback {
     margin-top: 30px;
     font-size: 1.2em;
-    color: #fff;
+    color: #ffffff;
 }
 
 .feedback p {

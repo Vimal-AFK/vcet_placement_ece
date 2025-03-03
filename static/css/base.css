@@ -8,6 +8,7 @@
 
 .navbar {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -120,50 +121,7 @@
     height: 400px;
 }
 
-.firstsection {
-        width: 80%; 
-        max-width: 1200px; 
-        margin: 0 auto; 
-        padding: 80px; 
-        background-color: #0048cd23; 
-        border: 2px solid #ccc;
-        border-radius: 10px; 
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-        text-align: center;  
-}
 
-.firstsection a {
-    color: rgb(0, 0, 0);
-}
-
-.firstsection a:hover {
-    color: grey;
-}
-
-
-
-.box-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    max-width: 80%;
-    margin: auto;
-    height: 80%;
-    
-}
-
-
-.text-big {
-    font-family: 'Piazzolla', serif;
-    font-weight: bold;
-    font-size: 30px;
-}
-
-.text-small {
-    font-family: 'Piazzolla', serif;
-    font-size: 18px;
-}
 
 .center{
     justify-items: center;
@@ -174,37 +132,6 @@
 }
 
 
-.text-footer {
-    padding: 10px;
-    font-family: 'Ubuntu', sans-serif;
-    display: flex;
-    justify-content: center;
-    color: rgb(0, 0, 0);
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: min-content;
-    background-color: rgba(0, 0, 0, 0.404); /* Footer background color */
-    text-align: center;
-    color: rgb(255, 255, 255);
-    font-family: 'Ubuntu', sans-serif;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-
-#search {
-    box-sizing: border-box;
-    width: 60%;
-    padding:8px;
-    font-size: 17px;
-    border: 2px solid rgb(110, 110, 110);
-    border-radius: 9px;
-}
 
 .btn {
     padding: 8px 20px;
@@ -222,8 +149,8 @@ footer {
 }
 
 .fullscreen-btn{
-    background: none; /* Removes button background */
-    border: none; /* Removes button border */
+    background: none; 
+    border: none; 
     cursor: pointer;
     padding: 10px;
     margin-left: auto;
@@ -231,7 +158,7 @@ footer {
 }
 
 .fullscreen-btn img {
-    width: 20px; /* Adjust the size of the icon */
+    width: 20px; 
     height: 20px;
 }
 

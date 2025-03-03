@@ -97,25 +97,34 @@
                         <div class="question-card" id="question-card-{{ forloop.counter }}">
                             <div style="background-color: #ccc; padding: 10px; border-radius: 5px; font-size: 15px; max-width: 600px; margin: 0 auto;">
                                 <p style="font-weight: bold; color: #333;">Question {{ forloop.counter }}:</p>
-                            <p>{{ question.question_text }}</p>
+                            <code class="language-c" style = "white-space: pre-wrap;"><p>{{ question.question_text | linebreaks }}</p></code>
                             </div>
                             <ul>
-                                <li>
-                                    <input type="radio" name="question_{{ question.id }}" value="A" onclick="markAnswered('{{ forloop.counter }}')">
-                                    A. {{ question.option_A }}
+                                <div style="padding: 1px; border-radius: 5px; background-color:#ccc; margin-top: 10px;">
+                                <li style="list-style-type: lower-alpha;">
+                                    <input style="float: left; margin-left: 10px; " type="radio" name="question_{{ question.id }}" value="A" onclick="markAnswered('{{ forloop.counter }}')">
+                                    <div style="margin-left: 40px;" >{{ question.option_A | linebreaks }}</div>
+                                    
                                 </li>
-                                <li>
-                                    <input type="radio" name="question_{{ question.id }}" value="B" onclick="markAnswered('{{ forloop.counter }}')">
-                                    B. {{ question.option_B }}
+                                </div>
+                                <div style="padding: 1px; border-radius: 5px; background-color:#ccc; margin-top: 10px;">
+                                <li style="list-style-type: lower-alpha;">
+                                    <input style="float: left; margin-left: 10px; " type="radio" name="question_{{ question.id }}" value="B" onclick="markAnswered('{{ forloop.counter }}')">
+                                    <div style="margin-left: 40px;" >{{ question.option_A | linebreaks }}</div>
                                 </li>
-                                <li>
-                                    <input type="radio" name="question_{{ question.id }}" value="C" onclick="markAnswered('{{ forloop.counter }}')">
-                                    C. {{ question.option_C }}
+                                </div>
+                                <div style="padding: 1px; border-radius: 5px; background-color:#ccc; margin-top: 10px;">
+                                <li style="list-style-type: lower-alpha;  margin-left: 10px;">
+                                    <input style="float: left; margin-left: 10px; " type="radio" name="question_{{ question.id }}" value="C" onclick="markAnswered('{{ forloop.counter }}')">
+                                    <div style="margin-left: 40px;" >{{ question.option_A | linebreaks }}</div>
                                 </li>
-                                <li>
-                                    <input type="radio" name="question_{{ question.id }}" value="D" onclick="markAnswered('{{ forloop.counter }}')">
-                                    D. {{ question.option_D }}
+                                </div>
+                                <div style="padding: 1px; border-radius: 5px; background-color:#ccc; margin-top: 10px;">
+                                <li style="list-style-type: lower-alpha;">
+                                    <input style="float: left; margin-left: 10px; " type="radio" name="question_{{ question.id }}" value="D" onclick="markAnswered('{{ forloop.counter }}')">
+                                    <div style="margin-left: 40px;" >{{ question.option_A | linebreaks }}</div>
                                 </li>
+                                </div>
                             </ul>
                             <button type="button" id="doubt-btn-{{ forloop.counter }}" class="doubt-btn" onclick="toggleDoubt('{{ forloop.counter }}')" style="background: white; color: black;">
                                 ❓ Mark as Doubt
@@ -350,8 +359,40 @@
             }
         }, 1000);  
         
+// Fetch questions rendered as JSON (replace this with a server-side variable in a real implementation)
+const questions = "{{ questions|safe }}";
+
+// Function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Shuffle the questions
+const shuffledQuestions = shuffleArray(questions);
+
+// Render questions dynamically
+const container = document.getElementById("question-card-{{ forloop.counter }}");
+shuffledQuestions.forEach((question, index) => {
+    const questionDiv = document.createElement("div");
+    questionDiv.classList.add("questions");
+    questionDiv.innerHTML = `
+        <p>${index + 1}. ${question.text}</p>
+        <div class="options">
+            <label><input type="radio" name="q${question.id}" value="A"> ${question.option_a}</label>
+            <label><input type="radio" name="q${question.id}" value="B"> ${question.option_b}</label>
+            <label><input type="radio" name="q${question.id}" value="C"> ${question.option_c}</label>
+            <label><input type="radio" name="q${question.id}" value="D"> ${question.option_d}</label>
+        </div>
+    `;
+    container.appendChild(questionDiv);
+});
 
 
+        
     </script>
 
     <script src="{% static 'js/test.js' %}"></script>

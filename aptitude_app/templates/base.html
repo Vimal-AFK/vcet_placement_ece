@@ -35,11 +35,15 @@
             
         </div>
         <button id="enterFullscreen" class="fullscreen-btn">
-            <img src="{% static 'images/enter_full_screen_logo.png' %}" alt="Enter Fullscreen">
+            <a href="{% url 'admin:index' %}" class="admin-icon">
+                <i class="bi bi-person-vcard" style="font-size: 1.5rem; color: rgb(10, 10, 10);"></i>
+            </a>
         </button>
     
         <button id="exitFullscreen" class="fullscreen-btn" style="display: none;">
-            <img src="{% static 'images/exit_full_screen_logo.png' %}" alt="Exit Fullscreen">
+            <a href="{% url 'admin:index' %}" class="admin-icon">
+                <i class="bi bi-person-vcard" style="font-size: 1.5rem; color: rgb(10, 10, 10);"></i>
+            </a>
         </button>
 
     </nav>
@@ -92,40 +96,5 @@
 <script src="{% static 'js/test.js' %}"></script>
 <script src="{% static 'js/profile.js' %}"></script>
 <script src="{% static 'js/practice_and_material.js' %}"></script>
-<script>
-    function initializeSPA() {
-        const section = window.location.hash.substring(1) || 'home';
-        showSection(section);
-        window.onpopstate = function(event) {
-            if (event.state && event.state.section) {
-                showSection(event.state.section);
-            }
-        };
-    }
-
-    function navigateTo(section) {
-        showSection(section);
-        history.pushState({ section: section }, '', `#${section}`);
-    }
-
-    function showSection(section) {
-        const sections = document.querySelectorAll('.content-section');
-        sections.forEach(sec => sec.style.display = 'none');
-        const activeSection = document.getElementById(`${section}Section`);
-        if (activeSection) {
-            activeSection.style.display = 'block';
-        }
-        document.querySelectorAll('.nav-list a').forEach(link => link.classList.remove('active'));
-        const activeLink = document.getElementById(section);
-        if (activeLink) {
-            activeLink.classList.add('active');
-        }
-    }
-
-    window.addEventListener('load', () => {
-        const section = window.location.hash.substring(1) || 'home';
-        showSection(section);
-    });
-</script>
 
 </html>

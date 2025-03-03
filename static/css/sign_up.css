@@ -33,7 +33,7 @@
     height: 100%;
 }
 .form-container {
-    max-height: 80vh; /* Adjust the height as needed */
+    max-height: 80vh; 
     overflow-y: auto;
     padding-bottom: 10px;
 }
@@ -53,27 +53,25 @@
 }
 
 
-/* Styling for help text (instructions) */
 .form-text {
-    font-size: 0.875rem; /* Slightly smaller font size */
-    color: #000000; /* Bootstrap muted text color */
-    margin-top: 4px;
+    font-size: 0.875rem; 
+    color: #000000; 
 }
 
-/* Container for error messages */
+
 .error-container {
-    border: 1px solid #dc3545; /* Bootstrap danger color */
-    background-color: rgba(220, 53, 69, 0.1); /* Light red background */
+    border: 1px solid #dc3545; 
+    background-color: rgba(220, 53, 69, 0.1); 
     padding: 3px;
     border-radius: 5px;
     margin-top: 10px;
     max-width:max-content;
 }
 
-/* Styling for individual error messages */
+
 .text-danger {
-    font-size: 0.875rem; /* Same size as help text for consistency */
-    color: #dc3545; /* Bootstrap danger color */
+    font-size: 0.875rem; 
+    color: #dc3545; 
     font-weight: bold;
     margin: 2px 0;
 }

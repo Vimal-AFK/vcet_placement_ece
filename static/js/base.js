@@ -84,5 +84,42 @@ function showMessage() {
     // Hide the message after 7 seconds
     setTimeout(() => {
         messageDiv.style.display = "none";
-    }, 7000); // 7000 milliseconds = 7 seconds
+    }, 7000); // 7000 milliseconds = 4 seconds
 }
+
+
+
+
+function initializeSPA() {
+    const section = window.location.hash.substring(1) || 'home';
+    showSection(section);
+    window.onpopstate = function(event) {
+        if (event.state && event.state.section) {
+            showSection(event.state.section);
+        }
+    };
+}
+
+function navigateTo(section) {
+    showSection(section);
+    history.pushState({ section: section }, '', `#${section}`);
+}
+
+function showSection(section) {
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(sec => sec.style.display = 'none');
+    const activeSection = document.getElementById(`${section}Section`);
+    if (activeSection) {
+        activeSection.style.display = 'block';
+    }
+    document.querySelectorAll('.nav-list a').forEach(link => link.classList.remove('active'));
+    const activeLink = document.getElementById(section);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+}
+
+window.addEventListener('load', () => {
+    const section = window.location.hash.substring(1) || 'home';
+    showSection(section);
+});

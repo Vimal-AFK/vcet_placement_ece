@@ -79,135 +79,20 @@
 
 
 
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
-    justify-content: center;
-    align-items: center;
- }
-
-.modal-content {
-    background-color: rgb(188, 188, 234);
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    max-width: 90%;
-    box-shadow: 3px 3px 10px rgba(0, 30, 87, 0.751);
-    text-align: center;
-    position: relative;
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-input {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.submit-btn {
-    background: rgb(0, 0, 70); 
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-
-.submit-btn:hover {
-    background-color: #555;
-}
-
-
-
-
-
-
 .profileData-container {
     position: absolute; 
     top: 0; 
-    left: 410px; 
-    right: 0;
+    left: 320px; 
+    right: 20px;
     width: max-content; 
     height: calc(100% - 40px);
     background-color: rgb(255, 255, 255);
-    padding: 20px;
+    padding: 10px;
     overflow-y: auto;
-    
     display: flex;
     flex-direction: column;
     gap: 50px;
 }
-
-
-
-.box-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 50px;
-}
-
-.box {
-    height: 130px;
-    width: 230px;
-    border-radius: 6px;
-    background-color:rgba(188, 188, 234, 0.349); 
-    border: 5px solid rgb(0, 30, 87);
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-    place-content: center;
-  }
-  
-  .box img {
-    height: 50px;
-  }
-  .box .text {
-    color: rgb(0, 0, 0);
-  }
-  .topic-heading {
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 1px;
-  }
-  
-  .topic {
-    font-size: 30px;
-    letter-spacing: 3px;
-  }
-
-
-
-
-
-
 
 
 .table-container {

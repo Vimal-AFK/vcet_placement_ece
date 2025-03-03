@@ -34,10 +34,10 @@ class Question(models.Model):
     mark = models.PositiveIntegerField(default=1)
 
 
-    option_A = models.CharField(max_length=255)
-    option_B = models.CharField(max_length=255)
-    option_C = models.CharField(max_length=255)
-    option_D = models.CharField(max_length=255)
+    option_A = models.TextField()
+    option_B = models.TextField()
+    option_C = models.TextField()
+    option_D = models.TextField()
 
     CORRECT_OPTION_CHOICES = [
         ('A', 'Option A'),

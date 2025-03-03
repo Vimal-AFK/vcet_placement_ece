@@ -97,7 +97,7 @@ def test(request, paper_code):
     context = {
         'attend': attend,
         'paper': paper,
-        'questions': paper.questions.all(),  # Assuming questions are related to QuestionPaper
+        'questions': paper.questions.all().order_by("?"),  # Assuming questions are related to QuestionPaper
     }
     print(attend)
     return render(request, 'test_activity/test.html', context)

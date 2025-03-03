@@ -1,4 +1,3 @@
-<div class="PROFILE">
     <div class="profile-container">
         <div class="profile-picture">
             {% load static %}
@@ -43,7 +42,7 @@
                         <td>{{ result.date_of_exam }}</td>
                         <td>{{ result.time }}</td>
                         <td>{{ result.test_code }}</td>
-                        <td>{{ result.test_title}}</td>
+                        <td>{{ result.test_title|truncatechars:25}}</td>
                         <td>{{ result.percentage }}</td>
                         <td class="status-{{ result.status|lower }}">{{ result.status }}</td>
                         <td>
@@ -59,4 +58,4 @@
             </table>
         </div>
     </div>
-</div>
+
