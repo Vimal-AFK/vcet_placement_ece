@@ -22,12 +22,10 @@
                         <h3 class="story-company">Company: {{ story.company }}</h3>
                         <h4 class="story-package">Package: {{ story.package }}</h4>
                         <p class="story-description">{{ story.content|truncatechars:150 }}</p>
-                        <span class="story-date">Date: {{ story.date }}</span>
                         <button class="read-more-btn" onclick="openPopup('{{ story.id }}')">Read More</button>
                     </div>
                 </div>
     
-                <!-- Popup Modal -->
                 <div id="popup-{{ story.id }}" class="popup-overlay" style="display: none;">
                     <div class="popup-container">
                         <span class="close-btn" onclick="closePopup('{{ story.id }}')">&times;</span>
