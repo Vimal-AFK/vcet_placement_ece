@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vcet_cell',
         'USER': 'root',
-        'PASSWORD': 'vimal',
+        'PASSWORD': 'Ssweth@',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
